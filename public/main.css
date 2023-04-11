@@ -21,4 +21,6 @@ img {
     --fs-secondary: clamp(3rem, 3vw, 1rem);
 
     /* color */
+    --primary-color: #DB4444;
+    --secondary-color: #black;
 }
