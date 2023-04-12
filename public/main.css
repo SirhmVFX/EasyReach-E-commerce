@@ -16,7 +16,7 @@ img {
 }
 
 :root {
-    font-family: ;
+    /* font-family: ; */
     --fs-primary: clamp(5rem, 5vw, 3rem);
     --fs-secondary: clamp(3rem, 3vw, 1rem);
 
