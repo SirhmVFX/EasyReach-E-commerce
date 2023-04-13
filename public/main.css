@@ -24,3 +24,8 @@ img {
     --primary-color: #DB4444;
     --secondary-color: #000000;
 }
+
+
+.firstheader {
+    background-color: var(--secondary-color);
+}

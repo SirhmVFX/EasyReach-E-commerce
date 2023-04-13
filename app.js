@@ -9,6 +9,6 @@ app.set("views", "views")
 app.set("view engine", "ejs")
 
 app.get("/", function(req, res) {
-    res.send("welcome to the app")
+    res.send("login")
 })
 app.listen(3000)  
