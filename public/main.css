@@ -28,4 +28,5 @@ img {
 
 .firstheader {
     background-color: var(--secondary-color);
+    color: aliceblue;
 }
