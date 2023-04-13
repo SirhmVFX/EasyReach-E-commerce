@@ -27,7 +27,22 @@ img {
 }
 
 
+/* utility classes */
+
+h1 {
+    font-size: var(--fs-primary);
+    font-weight: 900;
+}
+
+h2 {
+    font-size: var(--fs-secondary);
+    font-weight: 500;
+}
+
 .firstheader {
     background-color: var(--secondary-color);
     color: aliceblue;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
 }
