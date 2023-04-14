@@ -24,13 +24,14 @@ img {
     /* color */
     --primary-color: #DB4444;
     --secondary-color: #000000;
+    --neutral-color: #fff;
 }
 
 
 /* utility classes */
 
 .container {
-    width: min(1200px, 70%);
+    width: min(1400px, 80%);
     margin-inline: auto;
 
 }
@@ -57,11 +58,31 @@ nav {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+nav li {
+    list-style: none;
+}
+
+nav li a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+nav li a:hover {
+    background-color: var(--secondary-color);
+    color: var(--neutral-color);
+    
 }
 
 
 .nav_menu {
     display: flex;
-    justify-content: center;
+    width: 50%;
+    justify-content: space-around;
     align-items: center;
 }
