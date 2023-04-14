@@ -115,4 +115,6 @@ nav li a:hover {
     padding: 1rem;
     width: 370px;
     margin-block: 1rem;
+    border-bottom: 1px solid var(--secondary-color);
+    
 }
