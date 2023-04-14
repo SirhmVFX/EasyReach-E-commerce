@@ -29,6 +29,12 @@ img {
 
 /* utility classes */
 
+.container {
+    width: min(1200px, 70%);
+    margin-inline: auto;
+
+}
+
 h1 {
     font-size: var(--fs-primary);
     font-weight: 900;
@@ -45,4 +51,17 @@ h2 {
     display: flex;
     justify-content: center;
     padding: 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.nav_menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
