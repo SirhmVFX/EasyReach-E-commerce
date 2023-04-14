@@ -46,6 +46,14 @@ h2 {
     font-weight: 500;
 }
 
+.margin-bottom {
+    margin-bottom: 1rem;
+}
+
+
+
+/* general styles */
+
 .firstheader {
     background-color: var(--secondary-color);
     color: aliceblue;
@@ -89,10 +97,22 @@ nav li a:hover {
 
 .log_in {
     display: flex;  
-    justify-content: center;
+    justify-content: left;
+    gap: 6rem;
     align-items: center; 
 }
 
-.log_in figure {
-    width: 50%;
+.login_img {
+    width: 60%;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-fields input {
+    padding: 1rem;
+    width: 370px;
+    margin-block: 1rem;
 }
