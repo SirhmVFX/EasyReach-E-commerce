@@ -86,3 +86,13 @@ nav li a:hover {
     justify-content: space-around;
     align-items: center;
 }
+
+.log_in {
+    display: flex;  
+    justify-content: center;
+    align-items: center; 
+}
+
+.log_in figure {
+    width: 70%;
+}
