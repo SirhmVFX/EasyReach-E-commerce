@@ -87,7 +87,6 @@ nav {
     justify-content: space-evenly;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid var(--secondary-color);
 }
 
 nav li {
