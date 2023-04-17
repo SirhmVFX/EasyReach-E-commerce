@@ -50,6 +50,24 @@ h2 {
     margin-bottom: 1rem;
 }
 
+.button1 {
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--neutral-color);
+    border: none;
+}
+
+.color1 {
+    color: var(--primary-color);
+}
+.color2 {
+    color: var(--secondary-color);
+}
+
+.color3 {
+    color: var(--neutral-color);
+}
 
 
 /* general styles */
@@ -116,5 +134,10 @@ nav li a:hover {
     width: 370px;
     margin-block: 1rem;
     border-bottom: 1px solid var(--secondary-color);
-    
+}
+
+.btn-sect {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
