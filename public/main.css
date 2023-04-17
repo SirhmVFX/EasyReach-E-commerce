@@ -177,3 +177,12 @@ footer {
     color: var(--neutral-color);
     text-decoration: none;
 }
+
+.src-code {
+    display: flex;
+    gap: 1rem;
+}
+
+.src-code figure {
+    width: 50%;
+}
