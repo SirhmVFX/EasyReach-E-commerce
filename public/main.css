@@ -162,3 +162,18 @@ footer {
     flex-direction: column;
     gap: 1rem;
 }
+
+.foot-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.foot-nav li {
+    list-style: none;
+}
+
+.foot-nav li a {
+    color: var(--neutral-color);
+    text-decoration: none;
+}
