@@ -198,6 +198,12 @@ footer {
 
 .hero-section li {
     list-style: none;
+    margin-block: 1rem;
+}
+
+.hero-section li a {
+    text-decoration: none;
+    color: var(--secondary-color);
 }
 
 .feature-img {
