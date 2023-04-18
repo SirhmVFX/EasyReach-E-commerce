@@ -1,3 +1,7 @@
+exports.homepage = function(req, res) {
+    res.render("homepage")
+}
+
 exports.login = function(req, res) {
     res.render("login", {pageTitle: "Sign In - EasyReach"})
 }

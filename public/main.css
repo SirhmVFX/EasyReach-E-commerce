@@ -31,7 +31,7 @@ img {
 /* utility classes */
 
 .container {
-    width: min(1400px, 80%);
+    width: min(1400px, 90%);
     margin-inline: auto;
 
 }
