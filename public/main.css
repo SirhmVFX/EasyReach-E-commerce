@@ -200,4 +200,23 @@ footer {
     background-color: var(--secondary-color);
     color: var(--neutral-color);
     padding: 4rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.applelogo {
+    width: 20%;
+}
+
+.feat1 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.iphoneimg {
+    width: 70%;
 }
