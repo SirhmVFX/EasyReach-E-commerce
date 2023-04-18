@@ -33,6 +33,7 @@ img {
 .container {
     width: min(1400px, 90%);
     margin-inline: auto;
+    padding: 6rem;
 
 }
 
@@ -186,4 +187,10 @@ footer {
 
 .src-code figure {
     width: 50%;
+}
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
 }
