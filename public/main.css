@@ -33,7 +33,7 @@ img {
 .container {
     width: min(1400px, 90%);
     margin-inline: auto;
-    padding: 6rem;
+    padding: 2rem;
 
 }
 
@@ -192,5 +192,12 @@ footer {
 .hero-section {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 3rem;
+}
+
+.feature-img {
+    background-color: var(--secondary-color);
+    color: var(--neutral-color);
+    padding: 4rem;
 }
