@@ -1,5 +1,5 @@
 exports.homepage = function(req, res) {
-    res.render("homepage")
+    res.render("homepage", {pageTitle: "EasyReach"})
 }
 
 exports.login = function(req, res) {
