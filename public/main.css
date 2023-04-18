@@ -44,31 +44,31 @@ img {
 }
 
 h1 {
-    font-size: var(--fs-primary);
+    font-size: var(--fs-110);
 }
 
 h2 {
-    font-size: var(--fs-secondary);
+    font-size: var(--fs-90);
 }
 
 h3 {
-
+font-size: var(--fs-64);
 }
 
 h4 {
-
+font-size: var(--fs-54);
 }
 
 h5 {
-
+    font-size: var(--fs-48);
 }
 
 h6 {
-
+    font-size: var(--fs-36);
 }
 
 p {
-
+    font-size: var(--fs-20);
 }
 
 .margin-bottom {
