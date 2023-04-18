@@ -18,8 +18,14 @@ img {
 }
 
 :root {
-    --fs-primary: clamp(5rem, 5vw, 3rem);
-    --fs-secondary: clamp(3rem, 3vw, 1rem);
+    --fs-110: clamp(110px, 5vw, 90px);
+    --fs-90: clamp(90px, 3vw, 80px);
+    --fs-64: clamp(64px, 3vw, 54px);
+    --fs-54: clamp(64px, 3vw, 44px);
+    --fs-48: clamp(48px, 3vw, 38px);
+    --fs-36: clamp(36px, 3vw, 26px);
+    --fs-20: clamp(20px, 3vw, 10px);
+
 
     /* color */
     --primary-color: #DB4444;
@@ -39,14 +45,30 @@ img {
 
 h1 {
     font-size: var(--fs-primary);
-    font-weight: 900;
 }
-
-
 
 h2 {
     font-size: var(--fs-secondary);
-    font-weight: 500;
+}
+
+h3 {
+
+}
+
+h4 {
+
+}
+
+h5 {
+
+}
+
+h6 {
+
+}
+
+p {
+
 }
 
 .margin-bottom {
