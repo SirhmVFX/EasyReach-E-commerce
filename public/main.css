@@ -38,6 +38,8 @@ img {
 
 .container {
     width: min(1400px, 90%);
+    display: flex;
+    flex-direction: column;
     margin-inline: auto;
     padding: 2rem;
 
@@ -138,6 +140,7 @@ nav li a:hover {
 }
 
 .log_in {
+    padding: 4rem;
     display: flex;  
     justify-content: left;
     gap: 6rem;
@@ -145,7 +148,7 @@ nav li a:hover {
 }
 
 .login_img {
-    width: 50%;
+    display: none;
 }
 
 .form-fields {
@@ -251,4 +254,23 @@ footer {
 
 .iphoneimg {
     width: 70%;
+}
+
+
+@media (min-width: 1440px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .log_in {
+        padding: 0rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .login_img {
+        display: block;
+        width: 50%;
+
+    }
 }
