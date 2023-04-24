@@ -265,8 +265,14 @@ footer {
     display: flex;
     justify-content: space-between;
 }
+.product {
+    position: relative;
+    width: 250px;
+}
 
 .discout-tag {
+    position: absolute;
+    right: 0;
     padding: .5rem;
     background-color: var(--primary-color);
     border-radius: 10px;
@@ -276,13 +282,12 @@ footer {
 
 }
 
-.product {
-    width: 250px;
-}
+
 
 .prd-img {
     width: 70%;
     margin: 1rem;
+    padding: 1rem;
 }
 
 .pricing {
@@ -293,6 +298,12 @@ footer {
 
 .fa-star {
     color: var(--primary-color);
+}
+
+.product-listing {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .prd-details {
