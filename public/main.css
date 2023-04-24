@@ -261,10 +261,23 @@ footer {
     width: 100%;
 }
 
+.ctg {
+    border-left: 30px solid var(--primary-color);
+    padding: 2rem;
+}
+
 .actions {
     display: flex;
     justify-content: space-between;
 }
+
+.prd-list {
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .product {
     position: relative;
     width: 250px;
@@ -282,8 +295,6 @@ footer {
 
 }
 
-
-
 .prd-img {
     width: 70%;
     margin: 1rem;
@@ -298,12 +309,6 @@ footer {
 
 .fa-star {
     color: var(--primary-color);
-}
-
-.product-listing {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
 }
 
 .prd-details {
