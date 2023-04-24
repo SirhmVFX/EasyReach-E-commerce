@@ -18,11 +18,7 @@ img {
 }
 
 :root {
-    --fs-110: clamp(110px, 5vw, 90px);
-    --fs-90: clamp(90px, 3vw, 80px);
-    --fs-64: clamp(64px, 3vw, 54px);
-    --fs-54: clamp(64px, 3vw, 44px);
-    --fs-48: clamp(48px, 3vw, 38px);
+    --fs-48: clamp(56px, 3vw, 38px);
     --fs-36: clamp(36px, 3vw, 26px);
     --fs-20: clamp(20px, 3vw, 10px);
 
@@ -46,7 +42,7 @@ img {
 }
 
 h1 {
-    font-size: var(--fs-110);
+    font-size: var(--fs-48);
 }
 
 h2 {
@@ -221,7 +217,9 @@ footer {
 }
 
 .hero-section {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr 6fr;
     justify-content: center;
     align-items: center;
     gap: 3rem;
@@ -242,24 +240,25 @@ footer {
     color: var(--neutral-color);
     padding: 4rem;
 
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
     justify-content: space-between;
     align-items: center;
 
 }
 
 .applelogo {
-    width: 20%;
+    width: 10%;
 }
 
 .feat1 {
     display: flex;
     align-items: center;
-    gap: 1rem;
 }
 
 .iphoneimg {
-    width: 70%;
+    width: 100%;
 }
 
 
