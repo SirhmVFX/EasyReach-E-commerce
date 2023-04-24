@@ -273,7 +273,7 @@ footer {
 
 .prd-list {
     display: flex;
-    gap: 3rem;
+    gap: 2rem;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -300,6 +300,8 @@ footer {
     margin: 1rem;
     padding: 1rem;
 }
+
+
 
 .pricing {
     display: flex;
