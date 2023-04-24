@@ -18,13 +18,16 @@ img {
 }
 
 :root {
-    --fs-48: clamp(56px, 3vw, 38px);
-    --fs-36: clamp(36px, 3vw, 26px);
-    --fs-20: clamp(20px, 3vw, 10px);
+    --fs-h1: clamp(5rem, 5vw, 3rem);
+    --fs-h2: clamp(4rem, 4vw, 2rem);
+    --fs-h3: clamp(2rem, 4vw, 1rem);
+    --fs-h4: clamp(1rem, 4vw, .8rem);
 
+
+    --p: clamp(1rem, 4vw, 0.7rem);
 
     /* color */
-    --primary-color: #DB4444;
+    --primary-color: #d31616;
     --secondary-color: #000000;
     --neutral-color: #fff;
 }
@@ -42,31 +45,28 @@ img {
 }
 
 h1 {
-    font-size: var(--fs-48);
+    font-size: var(--fs-h1);
+    font-weight: 700;
 }
 
 h2 {
-    font-size: var(--fs-90);
+    font-size: var(--fs-h2);
+    font-weight: 500;
 }
 
 h3 {
-font-size: var(--fs-64);
+    font-size: var(--fs-h3);
+    font-weight: 200;
+    line-height: 1;
 }
 
 h4 {
-font-size: var(--fs-54);
-}
-
-h5 {
-    font-size: var(--fs-48);
-}
-
-h6 {
-    font-size: var(--fs-36);
+    font-size: var(--fs-h4);
+    font-weight: 600;
 }
 
 p {
-    font-size: var(--fs-20);
+    font-size: --p;
 }
 
 .margin-bottom {
@@ -259,6 +259,44 @@ footer {
 
 .iphoneimg {
     width: 100%;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.discout-tag {
+    padding: .5rem;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    width: 70px;
+    color: var(--neutral-color);
+    text-align: center;
+
+}
+
+.product {
+    width: 250px;
+}
+
+.prd-img {
+    width: 70%;
+    margin: 1rem;
+}
+
+.pricing {
+    display: flex;
+    gap: 1rem;
+    margin-block: .5rem;
+}
+
+.fa-star {
+    color: var(--primary-color);
+}
+
+.prd-details {
+    padding: 1rem;
 }
 
 
