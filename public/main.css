@@ -99,6 +99,15 @@ p {
     border-radius: 10px;
 }
 
+.button4 {
+    padding: 1rem 2rem;
+    background-color: var(--secondary-color);
+    color: var(--neutral-color);
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+}
+
 .button2 {
     padding: 2rem;
     border: 1px solid var(--secondary-color);
@@ -113,6 +122,10 @@ p {
     border: none;
     border-radius: 10px;
 } 
+
+.mg-tp {
+    margin-block: 1rem;
+}
 
 
 
