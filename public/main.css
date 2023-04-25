@@ -41,6 +41,8 @@ img {
     flex-direction: column;
     margin-inline: auto;
     padding: 2rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h1 {
