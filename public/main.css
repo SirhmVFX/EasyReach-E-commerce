@@ -369,6 +369,54 @@ footer {
     gap: 2rem;
 }
 
+.ft-section {
+    display: grid;
+    grid-template-areas: 
+    'a a b b' 
+    'a a c d'
+    ;
+
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.ft-section div:nth-child(1) {
+    grid-area: a;
+}
+
+.ft-section div:nth-child(2) {
+    grid-area: b;
+}
+
+.ft-section div:nth-child(3) {
+    grid-area: c;
+}
+
+.ft-section div:nth-child(4) {
+    grid-area: d;
+}
+
+.ft-prd {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    color: var(--neutral-color);
+    position: relative;
+}
+
+.ft-prd figure {}
+
+.ft-det {
+    padding: 2rem;
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
 
 @media (min-width: 1440px) {
     .container {
