@@ -404,7 +404,9 @@ footer {
     position: relative;
 }
 
-.ft-prd figure {}
+.ft-prd figure {
+    width: 200px;
+}
 
 .ft-det {
     padding: 2rem;
