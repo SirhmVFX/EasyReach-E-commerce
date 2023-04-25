@@ -41,7 +41,6 @@ img {
     flex-direction: column;
     margin-inline: auto;
     padding: 2rem;
-
 }
 
 h1 {
@@ -92,13 +91,30 @@ p {
     color: var(--neutral-color);
 }
 
-.button {
+.button1 {
     padding: 1rem 2rem;
     background-color: var(--primary-color);
     color: var(--neutral-color);
     border: none;
     border-radius: 10px;
 }
+
+.button2 {
+    padding: 2rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--neutral-color);
+}
+
+.button3 {
+    padding: 2rem;
+    background-color: var(--primary-color);
+    color: var(--neutral-color);
+    border: none;
+    border-radius: 10px;
+} 
+
+
 
 
 /* general styles */
@@ -323,6 +339,11 @@ footer {
 
 .prd-details {
     padding: 1rem;
+}
+
+.categories-container {
+    display: flex;
+    gap: 2rem;
 }
 
 
