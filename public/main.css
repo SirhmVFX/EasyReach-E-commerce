@@ -92,6 +92,14 @@ p {
     color: var(--neutral-color);
 }
 
+.button {
+    padding: 1rem 2rem;
+    background-color: var(--primary-color);
+    color: var(--neutral-color);
+    border: none;
+    border-radius: 10px;
+}
+
 
 /* general styles */
 
