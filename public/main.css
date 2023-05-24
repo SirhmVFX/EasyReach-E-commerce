@@ -384,10 +384,8 @@ footer {
 }
 
 .prd-img {
-    width: 80%;
     margin: 1rem;
     padding: 1rem;
-    object-fit: cover;
     display: flex;
     justify-content: center;
     align-items: center;
