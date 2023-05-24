@@ -354,8 +354,8 @@ footer {
 .prd-list {
     display: flex;
     gap: 1rem;
-    justify-content: space-between;
     flex-wrap: wrap;
+    margin-inline: auto;
 }
 
 .product {
