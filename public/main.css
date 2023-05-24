@@ -55,6 +55,7 @@ input {
     margin-inline: auto;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem;
 }
 
 h1 {
@@ -92,6 +93,7 @@ p {
     background-color: var(--primary-color);
     color: var(--neutral-color);
     border: none;
+    cursor: pointer;
 }
 
 .color1 {
@@ -105,13 +107,7 @@ p {
     color: var(--neutral-color);
 }
 
-.button1 {
-    padding: 1rem 2rem;
-    background-color: var(--primary-color);
-    color: var(--neutral-color);
-    border: none;
-    border-radius: 10px;
-}
+
 
 .button4 {
     padding: 1rem 2rem;
@@ -120,6 +116,7 @@ p {
     border: none;
     border-radius: 10px;
     width: 100%;
+    cursor: pointer;
 }
 
 .button2 {
@@ -127,6 +124,7 @@ p {
     border: 1px solid var(--secondary-color);
     border-radius: 10px;
     background-color: var(--neutral-color);
+    cursor: pointer;
 }
 
 .button3 {
@@ -279,20 +277,34 @@ footer {
 .hero-section {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 1fr 6fr;
+    grid-auto-columns: 1fr 4fr;
     justify-content: center;
     align-items: center;
     gap: 3rem;
 }
 
+.hero-section ul{
+    display: flex;
+    flex-direction: column;
+}
+
 .hero-section li {
     list-style: none;
-    margin-block: 1rem;
+    padding: .7rem;
 }
 
 .hero-section li a {
     text-decoration: none;
     color: var(--secondary-color);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.hero-section li a:hover {
+    background-color: var(--secondary-color);
+    color: var(--neutral-color);
+    transition: .4s;
+
 }
 
 .feature-img {
@@ -305,16 +317,24 @@ footer {
     grid-auto-columns: 1fr;
     justify-content: space-between;
     align-items: center;
+    border-radius: 20px;
 
 }
 
+.freeoo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .applelogo {
-    width: 10%;
+    width: 8%;
 }
 
 .feat1 {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 .iphoneimg {
@@ -333,21 +353,21 @@ footer {
 
 .prd-list {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .product {
     position: relative;
-    width: 300px;
-    height: 500px;
+    width: 250px;
     background-color: #F5F5F5;
-    padding: 2rem;
+    padding: 1rem;
     color: var(--secondary-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     border-radius: 10px;
 }
 
@@ -364,10 +384,15 @@ footer {
 }
 
 .prd-img {
-    width: 70%;
+    width: 80%;
     margin: 1rem;
     padding: 1rem;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 
 
@@ -446,6 +471,11 @@ footer {
     flex-direction: column;
     gap: 1rem;
 
+} 
+
+.catt:hover {
+    background-color: var(--primary-color);
+    color: var(--neutral-color) ;
 }
 
 
