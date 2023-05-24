@@ -27,7 +27,7 @@ img {
     padding: .5rem;
     border-radius: 10px;
     border: 1px solid var(--secondary-color);
-    width: 400px;
+    width: 300px;
 }
 
 :root {
@@ -153,7 +153,7 @@ p {
 }
 
 nav {
-    width: min(1400px, 70%);
+    width: min(1400px, 80%);
     margin-inline: auto;
     display: flex;
     justify-content: space-between;
@@ -175,7 +175,7 @@ nav li a {
 nav li a:hover {
     background-color: var(--secondary-color);
     color: var(--neutral-color);
-    
+    transition: .4s;
 }
 
 nav li:active {
@@ -360,7 +360,7 @@ footer {
 
 .product {
     position: relative;
-    width: 250px;
+    width: 280px;
     background-color: #F5F5F5;
     padding: 1rem;
     color: var(--secondary-color);
@@ -418,7 +418,8 @@ footer {
 
 .categories-container {
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
+    margin-inline: auto;
 }
 
 .ft-section {
@@ -429,12 +430,16 @@ footer {
     ;
 
     grid-template-rows: 1fr;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 1rem;
 }
 
 .ft-section div:nth-child(1) {
     grid-area: a;
+    
+}
+
+.ft-section div:nth-child(1) .sp {
     width: 500px;
 }
 
@@ -461,7 +466,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3rem;
+    padding: 2rem;
 }
 
 
