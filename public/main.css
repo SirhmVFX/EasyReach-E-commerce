@@ -373,6 +373,7 @@ footer {
 
 .discout-tag {
     position: absolute;
+    top: 20px;
     right: 20px;
     padding: .5rem;
     background-color: var(--primary-color);
@@ -384,7 +385,6 @@ footer {
 }
 
 .prd-img {
-    margin: 1rem;
     padding: 1rem;
     display: flex;
     justify-content: center;
