@@ -241,13 +241,17 @@ footer {
 
 .foot {
     display: flex;
-    justify-content: space-between;
+    margin: auto;
+    gap: 5rem;
+
+    
 }
 
 .ft1 {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    
 }
 
 .foot-nav {
@@ -268,10 +272,17 @@ footer {
 .src-code {
     display: flex;
     gap: 1rem;
+    
+
 }
 
-.src-code figure {
-    width: 50%;
+
+.gog {
+    width: 100px;
+}
+
+.gogl {
+    width: 100px;
 }
 
 .hero-section {
