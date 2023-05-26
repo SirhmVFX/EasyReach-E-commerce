@@ -556,6 +556,36 @@ footer input {
 }
 
 
+.profile-button {
+    position: relative;
+}
+
+.profile-button:hover .account-opt{
+    display: block;
+}
+
+.account-opt {
+    position: absolute;
+    display: none;
+    background-color: #000000;
+    right: 0;
+    padding: 1rem;
+    width: 300px;
+    border-radius: 10px;
+    color: var(--neutral-color);
+}
+
+.opt {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+
+
+
+
 @media (min-width: 1440px) {
     .container {
         flex-direction: row;
