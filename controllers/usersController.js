@@ -10,3 +10,7 @@ exports.signup = function(req, res) {
     res.render("signup", {pageTitle: "SignUp - EasyReach"} )
 }
 
+
+exports.wishlist = function(req, res) {
+    res.render("wishlist", {pageTitle: "Wishlist"})
+}
