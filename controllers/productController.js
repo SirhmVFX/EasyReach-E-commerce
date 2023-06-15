@@ -1,12 +1,22 @@
 const Product = require("../models/Product");
+const Category = require("../models/Category");
 const { StatusCodes } = require("http-status-codes");
 const HttpError = require("../HttpException");
 
 const createProduct = async (req, res) => {
-    req.body.user = req.user.userId;
-    const product = await Product.create(req.body);
-    res.status(StatusCodes.CREATED).json({ product });
-};
+    try {
+      const categories = await Category.find();
+  
+      req.body.user = req.user.userId;
+      const product = await Product.create(req.body);
+      
+      res.status(StatusCodes.CREATED).json({ product, categories });
+    } catch (error) {
+      console.error(error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Something went wrong' });
+    }
+  };
+  
 
 const getAllProducts = async (req, res) => {
     let products;
