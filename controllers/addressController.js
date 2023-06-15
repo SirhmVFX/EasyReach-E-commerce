@@ -1,4 +1,5 @@
 const Address = require("../models/Address");
+const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
 const HttpError = require("../HttpException");
 
@@ -15,7 +16,7 @@ const addShippingAddress = async (req, res) => {
     }
 
     const address = new Address({
-        user: user._id,
+        user: user,
         addressLine1,
         addressLine2,
         city,
@@ -30,11 +31,10 @@ const addShippingAddress = async (req, res) => {
 };
 
 const updateAddress = async (req, res) => {
-    const { userId } = req.user;
     const { addressId } = req.params;
     const { addressLine1, addressLine2, city, state, country, postalCode } = req.body;
 
-    const address = await Address.findOne({ _id: addressId, user: userId });
+    const address = await Address.findOne({ _id: addressId, user: req.user.userId });
 
     if (!address) {
         throw new HttpError.NotFoundError('Address not found');
@@ -47,16 +47,14 @@ const updateAddress = async (req, res) => {
     address.country = country;
     address.postalCode = postalCode;
 
-    // Save the updated address
     await address.save();
 
     res.status(StatusCodes.OK).json({ address });
 };
 
 const getShippingAddress = async (req, res) => {
-    const { userId } = req.params.id;
 
-    const addresses = await Address.find({ user: userId });
+    const addresses = await Address.find({ user: req.user.userId });
 
     if (!addresses) {
         throw new HttpError.NotFoundError('Shipping addresses not found');
@@ -66,10 +64,9 @@ const getShippingAddress = async (req, res) => {
 };
 
 const deleteAddress = async (req, res) => {
-    const { userId } = req.user;
     const { addressId } = req.params;
 
-    const address = await Address.findOne({ _id: addressId, user: userId });
+    const address = await Address.findOne({ _id: addressId, user: req.user.userId });
 
     if (!address) {
         throw new HttpError.NotFoundError('Address not found');
