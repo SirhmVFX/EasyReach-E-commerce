@@ -90,11 +90,6 @@ const deleteProduct = async (req, res) => {
         .json({ msg: `Success! Product with id ${productId}removed.` });
 };
 
-const getAllCategories = async (req, res) => {
-    const categories = await Product.find({}).distinct("category");
-    res.status(200).json(categories);
-};
-
 module.exports = {
     createProduct,
     getAllProducts,
@@ -103,5 +98,4 @@ module.exports = {
     deleteProduct,
     searchProducts,
     searchCategoryProducts,
-    getAllCategories,
 };
