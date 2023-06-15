@@ -16,8 +16,6 @@ const {
   searchCategoryProducts
 } = require('../controllers/productController');
 
-const { getSingleProductReviews } = require('../controllers/reviewController');
-
 router
   .route('/')
   .post([authenticateUser, authorizePermissions('admin')], createProduct)
@@ -30,7 +28,6 @@ router
   .patch([authenticateUser, authorizePermissions('admin')], updateProduct)
   .delete([authenticateUser, authorizePermissions('admin')], deleteProduct);
 
-router.route('/:id/reviews').get(getSingleProductReviews);
 router.route('/search').get(searchProducts);
 router.route('/category').get(searchCategoryProducts);
 router.route('/categories').get(getAllCategories);

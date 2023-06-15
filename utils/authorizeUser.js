@@ -1,9 +1,9 @@
-const Error = require("../HttpError");
+const HttpError = require("../HttpException");
 
 const authorizeUser = (currentUser, currentUserId) => {
   if (currentUser.userId === currentUserId.toString()) return;
  
-  throw new Error.UnauthorizedError(
+  throw new HttpError.UnauthorizedHttpError(
     "You are not authorized to access these resource"
   );
 };

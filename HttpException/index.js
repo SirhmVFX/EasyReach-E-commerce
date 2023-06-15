@@ -1,6 +1,5 @@
-
 const BadRequestError = require("./badRequest");
-const UnauthorizedError = require("./Unauthorized");
+const UnauthorizedError = require("./unauthorized");
 const UnauthenticatedError = require("./Unauthenticated");
 const HttpError = require("./HttpError");
 const NotFoundError = require("./notFound");

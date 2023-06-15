@@ -15,8 +15,6 @@ const mongoSanitize = require("express-mongo-sanitize");
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 
-const router = require("./router")
-
 app.set("trust proxy", 1);
 app.use(
   rateLimiter({
@@ -40,8 +38,6 @@ app.use(express.static("public"))
 app.use(express.static("public/images"))
 app.set("views", "views")
 app.set("view engine", "ejs")
-
-app.use("/", router)
 
 // error middlewares
 app.use(errorHandlerMiddleware);
