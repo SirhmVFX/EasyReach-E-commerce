@@ -18,6 +18,10 @@ const OrderSchema = mongoose.Schema(
             type: Number,
             required: true,
         },
+        shippingFee: {
+            type: Number,
+            required: true,
+        },
         deliveryFee: {
             type: Number,
             required: true,
