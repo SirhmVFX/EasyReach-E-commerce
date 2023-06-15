@@ -18,6 +18,7 @@ const userRouter = require("./routes/User");
 const productRouter = require("./routes/Product");
 const categoryRouter = require("./routes/Category");
 const reviewRouter = require("./routes/Review");
+const orderRouter = require("./routes/Order");
 
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
@@ -42,6 +43,7 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/orders", orderRouter);
 
 app.use(express.json({ limit: "50mb" }));
 
