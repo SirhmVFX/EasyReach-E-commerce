@@ -1,5 +1,5 @@
 const { isTokenValid } = require("../utils");
-const HttpError = require("../HttpError");
+const HttpError = require("../HttpException");
 const authenticateUser = async (req, res, next) => {
     const AuthorizationHeader = req.headers.authorization;
 

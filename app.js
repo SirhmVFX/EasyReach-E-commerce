@@ -6,11 +6,18 @@ const app = express();
 const connectDB = require("./config/connect");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 const rateLimiter = require("express-rate-limit");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const cors = require("cors");
 const mongoSanitize = require("express-mongo-sanitize");
+
+const authRouter = require("./routes/Auth");
+const userRouter = require("./routes/User");
+const productRouter = require("./routes/Product");
+const categoryRouter = require("./routes/Category");
+const reviewRouter = require("./routes/Review");
 
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
@@ -28,6 +35,13 @@ app.use(cors());
 app.use(xss());
 app.use(mongoSanitize());
 app.use(morgan("tiny"));
+app.use(cookieParser(process.env.JWT_SECRET));
+
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/products", productRouter);
+app.use("/api/v1/category", categoryRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 app.use(express.json({ limit: "50mb" }));
 
