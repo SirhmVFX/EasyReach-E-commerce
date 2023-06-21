@@ -1,47 +1,51 @@
 const axios = require('axios');
+const HttpError = require('../HttpException');
 
-const paystack = () => {
-  const initializePayment = (mycallback) => {
-    const options = {
-      url: 'https://api.paystack.co/transaction/initialize',
-      headers: {
-        authorization: process.env.PAYSTACK_SECRET_KEY,
-        'content-type': 'application/json',
-        'cache-control': 'no-cache',
-      },
-    };
-
-    axios
-      .post(options.url, {}, { headers: options.headers })
-      .then((response) => {
-        mycallback(null, response.data);
-      })
-      .catch((error) => {
-        mycallback(error, null);
-      });
-  };
-
-  const verifyPayment = (ref, mycallback) => {
-    const options = {
-      url: `https://api.paystack.co/transaction/verify/${encodeURIComponent(ref)}`,
-      headers: {
-        authorization: process.env.PAYSTACK_SECRET_KEY,
-        'content-type': 'application/json',
-        'cache-control': 'no-cache',
-      },
-    };
-
-    axios
-      .get(options.url, { headers: options.headers })
-      .then((response) => {
-        mycallback(null, response.data);
-      })
-      .catch((error) => {
-        mycallback(error, null);
-      });
-  };
-
-  return { initializePayment, verifyPayment };
+const headers = {
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
 };
 
-module.exports = paystack;
+class Paystack {
+  constructor() {
+    this.data = null;
+  }
+
+  initializePayment = async (data) => {
+    const url = 'https://api.paystack.co/transaction/initialize';
+
+    try {
+      const result = await axios.post(
+        url,
+        {
+          email: data.email,
+          amount: data.amount + '00',
+          ref: data.reference_id,
+        },
+        {
+          headers: headers,
+        }
+      );
+      this.data = result.data;
+    } catch (error) {
+      throw new HttpError.BadRequestError("Something went wrong");
+    }
+
+    return this.data;
+  };
+
+  verifyPayment = async (reference) => {
+    try {
+      const result = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
+        headers: headers,
+      });
+      this.data = result.data;
+    } catch (error) {
+      throw new HttpError.BadRequestError("Something went wrong");
+    }
+
+    return this.data;
+  };
+}
+
+module.exports = Paystack;
