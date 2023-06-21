@@ -11,6 +11,7 @@ const rateLimiter = require("express-rate-limit");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const cors = require("cors");
+const path = require("path");
 const mongoSanitize = require("express-mongo-sanitize");
 
 const authRouter = require("./routes/Auth");
@@ -50,10 +51,20 @@ app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-app.use(express.static("public"))
-app.use(express.static("public/images"))
-app.set("views", "views")
-app.set("view engine", "ejs")
+app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', require('./routes/Root'))
+app.all('*', (req, res) => {
+  res.status(404)
+  if (req.accepts('html')) {
+    res.sendFile(path.join(__dirname, 'views', '404.html'))
+  } else if (req.accepts('json')) {
+    res.json({ message: '404 Not Found' })
+  } else {
+    res.type('txt').send('404 Not Found')
+  }
+})
+
+app.use('/', express.static(path.join(__dirname, 'public/images')))
 
 // error middlewares
 app.use(errorHandlerMiddleware);
