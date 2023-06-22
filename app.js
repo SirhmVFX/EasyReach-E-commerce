@@ -39,6 +39,12 @@ app.use(mongoSanitize());
 app.use(morgan("tiny"));
 app.use(cookieParser(process.env.JWT_SECRET));
 
+// Swagger UI
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerJsDocs = YAML.load("./docs/documentation.yaml");
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
