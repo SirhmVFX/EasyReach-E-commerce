@@ -7,7 +7,7 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      maxlenght: [100, "Name can not be more than 100 characters"],
+      maxlength: [100, "Name cannot be more than 100 characters"],
     },
     price: {
       type: Number,
@@ -17,14 +17,15 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
     },
-    colors: {
-      type: [String],
+    colors: [{
+      type: String,
       required: true,
-    },
-    images: {
-      type: [String],
-      required: true,
-    },
+    }],
+    images: [{
+      url: {
+        type: String,
+      }
+    }],
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
@@ -32,12 +33,16 @@ const ProductSchema = new Schema(
     },
     miniDescription: {
       type: String,
-      maxlenght: [100, "Minidescription cannot be more than 100 characters"]
+      maxlength: [100, "Mini description cannot be more than 100 characters"]
     },
     description: {
       type: String,
       required: true,
     },
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    }
   },
   { timestamps: true }
 );
