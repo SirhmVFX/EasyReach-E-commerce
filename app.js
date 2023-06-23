@@ -20,6 +20,7 @@ const productRouter = require("./routes/Product");
 const categoryRouter = require("./routes/Category");
 const reviewRouter = require("./routes/Review");
 const orderRouter = require("./routes/Order");
+const contactRouter = require("./routes/Contact");
 
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
@@ -39,7 +40,7 @@ app.use(mongoSanitize());
 app.use(morgan("tiny"));
 app.use(cookieParser(process.env.JWT_SECRET));
 
-// Swagger UI
+
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerJsDocs = YAML.load("./docs/documentation.yaml");
@@ -51,6 +52,7 @@ app.use("/api/v1/products", productRouter);
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
+app.use("/api/v1/contact", contactRouter);
 
 app.use(express.json({ limit: "50mb" }));
 
@@ -72,7 +74,7 @@ app.all('*', (req, res) => {
 
 app.use('/', express.static(path.join(__dirname, 'public/images')))
 
-// error middlewares
+
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);
 const PORT = process.env.PORT || 7000;
