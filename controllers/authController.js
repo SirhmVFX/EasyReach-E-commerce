@@ -8,7 +8,7 @@ const bcryptjs = require("bcryptjs");
 
 const register = async (req, res, next) => {
     try {
-        const { email, name, password } = req.body;
+        const { email, firstName, lastName, password } = req.body;
 
         const emailAlreadyExists = await User.findOne({ email });
         if (emailAlreadyExists) {
@@ -18,7 +18,29 @@ const register = async (req, res, next) => {
         const isFirstAccount = (await User.countDocuments({})) === 0;
         const role = isFirstAccount ? "admin" : "user";
 
-        const user = await User.create({ name, email, password, role });
+        const user = await User.create({ firstName, lastName, email, password, role });
+
+        const username = user.firstName + " " + user.lastName;
+        const subject = "Welcome To Easyreach";
+        const send_to = email;
+        const sent_from = "Easyreach <hello@seemetracker.com>";
+        const reply_to = "admin@mail.com";
+        const template = "welcome";
+        const name = username;
+
+        try {
+            await sendEmail(
+                subject,
+                send_to,
+                sent_from,
+                reply_to,
+                template,
+                name
+            );
+        } catch (error) {
+            console.error("Error sending email:", error);
+        }
+
         const tokenUser = UserTokenPayload(user);
         const token = createJWT({ payload: tokenUser });
 
@@ -72,18 +94,19 @@ const forgetPassword = async (req, res, next) => {
         }
 
         const newPassword = generateRandomPassword(10);
-        const hashedPassword = await hash(newPassword);
+        const hashedPassword = await bcryptjs.hash(newPassword);
 
         user.password = hashedPassword;
         await user.save();
 
+        const username = user.firstname + " " + user.lastname;
         const subject = "Reset Password";
         const send_to = email;
         const sent_from = "Easyreach <hello@seemetracker.com>";
         const reply_to = "admin@mail.com";
         const template = "forgetPassword";
         const newpassword = newPassword;
-        const name = user.name;
+        const name = username;
 
         try {
             await sendEmail(

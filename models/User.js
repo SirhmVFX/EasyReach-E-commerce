@@ -5,21 +5,17 @@ const Schema = mongoose.Schema;
 const autopopulate = require("mongoose-autopopulate");
 const UserSchema = new Schema(
   {
-    firstname: {
+    firstName: {
       type: String,
       required: [true, "You must provide a firstname"],
     },
-    lastname: {
+    lastName: {
       type: String,
       required: [true, "You must provide a lastname"],
     },
     email: {
       type: String,
       unique: true,
-      validate: {
-        validator: validator.isEmail,
-        message: "Please provide a valid email address",
-      },
     },
     phone: {
       type: Number,

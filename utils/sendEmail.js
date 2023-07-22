@@ -10,9 +10,10 @@ const sendEmail = async (
     template,
     newpassword,
     name,
+    year,
     emailContent,
 ) => {
-
+    const currentYear = new Date().getFullYear();
     const transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT,
@@ -48,6 +49,7 @@ const sendEmail = async (
         context: {
             name,
             newpassword,
+            year: currentYear,
             emailContent,
         },
     };
