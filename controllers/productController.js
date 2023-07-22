@@ -1,111 +1,187 @@
-const Product = require("../models/Product");
-const Category = require("../models/Category");
-const { StatusCodes } = require("http-status-codes");
-const HttpError = require("../HttpException");
+const Product = require('../models/Product');
+const { StatusCodes } = require('http-status-codes');
+const HttpError = require('../HttpException');
 
-const createProduct = async (req, res) => {
+const createProduct = async (req, res, next) => {
     try {
-      const categories = await Category.find();
-  
-      req.body.user = req.user.userId;
-      const product = await Product.create(req.body);
-      
-      res.status(StatusCodes.CREATED).json({ product, categories });
-    } catch (error) {
-      console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Something went wrong' });
-    }
-  };
-  
+        const {
+            name,
+            price,
+            quantity,
+            colors,
+            category,
+            miniDescription,
+            description,
+        } = req.body;
 
-const getAllProducts = async (req, res) => {
-    let products;
+        const productImages = [];
 
-    products = await Product.find({}).sort("createdAt");
-    res.status(StatusCodes.OK).json(products);
-};
+        if (req.files && req.files.images) {
+            for (const image of req.files.images) {
+                const result = await cloudinary.uploader.upload(image.path, {
+                    folder: 'easy',
+                });
 
-const searchProducts = async (req, res) => {
-    const query = req.query.search_query;
-    let products;
-    try {
-        products = await Product.find({ name: { $regex: query, $options: "i" } });
-        res.status(200).json(products);
-        if (products.length < 1) {
-            res.status(200).json({ msg: "No products match your search!!" });
+                productImages.push({
+                    url: result.secure_url,
+                    public_id: result.public_id,
+                });
+            }
         }
-    } catch (err) {
-        console.log(err, "search failed");
-        res.status(500).json({
-            errorMessage: "Please try again later",
+
+        const product = new Product({
+            name,
+            price,
+            quantity,
+            colors,
+            images: productImages,
+            category,
+            miniDescription,
+            description,
         });
+
+        const savedProduct = await product.save();
+
+        res.status(StatusCodes.CREATED).json(savedProduct);
+    } catch (error) {
+        next(error);
     }
 };
 
-const getSingleProduct = async (req, res) => {
-    const { id: productId } = req.params;
-    const product = await Product.findOne({ _id: productId }).populate("reviews");
-
-    if (!product) {
-        throw new HttpError.NotFoundError(`No product with id : ${productId}`);
-    }
-
-    res.status(StatusCodes.OK).json({ product });
-};
-
-const searchCategoryProducts = async (req, res) => {
-    const category = req.query.category;
-
+const updateProduct = async (req, res, next) => {
     try {
+        const productId = req.params.id;
+        const {
+            name,
+            price,
+            quantity,
+            colors,
+            category,
+            miniDescription,
+            description,
+        } = req.body;
+
+        const productImages = [];
+
+        if (req.files && req.files.images) {
+            for (const image of req.files.images) {
+                const result = await cloudinary.uploader.upload(image.path, {
+                    folder: 'easy',
+                });
+
+                productImages.push({
+                    url: result.secure_url,
+                    public_id: result.public_id,
+                });
+            }
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(
+            productId,
+            {
+                name,
+                price,
+                quantity,
+                colors,
+                images: productImages,
+                category,
+                miniDescription,
+                description,
+            },
+            { new: true }
+        );
+
+        if (!updatedProduct) {
+            throw new HttpError.NotFoundError('Product not found');
+        }
+
+        res.json(updatedProduct);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getProducts = async (req, res, next) => {
+    try {
+        const products = await Product.find({});
+
+        if (products.length === 0) {
+            res.json({ message: 'No products found' });
+        } else {
+            res.json(products);
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getProduct = async (req, res, next) => {
+    try {
+        const productId = req.params.id;
+        const product = await Product.findById(productId);
+
+        if (!product) {
+            throw new HttpError.NotFoundError('Product not found');
+        }
+
+        res.json(product);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const searchProducts = async (req, res, next) => {
+    try {
+        const { keyword } = req.query;
+
+        if (!keyword || keyword.trim() === '') {
+            throw new HttpError.BadRequestError('Keyword is required for search');
+        }
+
         const products = await Product.find({
-            category: { $regex: category, $options: "i" },
+            $or: [
+                { name: { $regex: keyword, $options: 'i' } },
+                { description: { $regex: keyword, $options: 'i' } },
+            ],
         });
 
-        res.status(200).json(products);
-    } catch (err) {
-        console.log(err, "filter failed");
-        res.status(500).json({
-            errorMessage: "Please try again later",
-        });
+        if (products.length === 0) {
+            return res.json({ message: 'No products found matching the search criteria' });
+        }
+
+        res.json(products);
+    } catch (error) {
+        next(error);
     }
 };
 
-const updateProduct = async (req, res) => {
-    const { id: productId } = req.params;
+const deleteProduct = async (req, res, next) => {
+    try {
+        const productId = req.params.id;
 
-    const product = await Product.findOneAndUpdate({ _id: productId }, req.body, {
-        new: true,
-        runValidators: true,
-    });
+        const deletedProduct = await Product.findByIdAndDelete(productId);
 
-    if (!product) {
-        throw new HttpError.NotFoundError(`No product with id : ${productId}`);
+        if (!deletedProduct) {
+            throw new HttpError.NotFoundError('Product not found');
+        }
+
+        if (deletedProduct.images && deletedProduct.images.length > 0) {
+            for (const image of deletedProduct.images) {
+                await cloudinary.uploader.destroy(image.public_id);
+            }
+        }
+
+        res.json(deletedProduct);
+    } catch (error) {
+        next(error);
     }
-
-    res.status(StatusCodes.OK).json({ product });
-};
-
-const deleteProduct = async (req, res) => {
-    const { id: productId } = req.params;
-
-    const product = await Product.findOne({ _id: productId });
-
-    if (!product) {
-        throw new HttpError.NotFoundError(`No product with id : ${productId}`);
-    }
-
-    await product.remove();
-    res
-        .status(StatusCodes.OK)
-        .json({ msg: `Success! Product with id ${productId}removed.` });
 };
 
 module.exports = {
     createProduct,
-    getAllProducts,
-    getSingleProduct,
     updateProduct,
-    deleteProduct,
+    getProducts,
+    getProduct,
     searchProducts,
-    searchCategoryProducts,
+    deleteProduct,
 };

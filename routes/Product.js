@@ -7,30 +7,28 @@ const {
 
 const {
   createProduct,
-  getAllProducts,
-  getSingleProduct,
+  getProducts,
+  getProduct,
   updateProduct,
   deleteProduct,
   searchProducts,
-  searchCategoryProducts
 } = require('../controllers/productController');
 
 const { getSingleProductReviews } = require('../controllers/reviewController');
 
 router
-  .route('/')
+  .route('')
   .post([authenticateUser, authorizePermissions('admin')], createProduct)
-  .get(getAllProducts);
+  .get(getProducts);
 
 
 router
-  .route('/find/:id')
-  .get(getSingleProduct)
+  .route('/:id')
+  .get(getProduct)
   .patch([authenticateUser, authorizePermissions('admin')], updateProduct)
   .delete([authenticateUser, authorizePermissions('admin')], deleteProduct);
 
 router.route('/:id/reviews').get(getSingleProductReviews);
 router.route('/search').get(searchProducts);
-router.route('/category').get(searchCategoryProducts);
 
 module.exports = router;

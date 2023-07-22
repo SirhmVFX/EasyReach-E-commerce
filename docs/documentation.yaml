@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: EasyReach API
-  description: Api for user movies
+  description: API for user movies
   version: 1.0.0
   contact:
     name: Solomon Olatunji
@@ -12,8 +12,439 @@ servers:
     description: Development server
 
 tags:
-  - name: Movies
-    description: Auth actions with movies
+  - name: Authentication
+    description: Operations related to Authentication
+  - name: Products
+    description: Operations related to products
+  - name: Coupons
+    description: Operations related to coupons
+  - name: Banners
+    description: Operations related to banners
+
+paths:
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Get all products
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+
+    post:
+      summary: Add a new product
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Add a new product
+        required: true
+        schema:
+          $ref: "#/components/schemas/ProductCreateDTO"
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        201:
+          description: "Created"
+        400:
+          description: "Required Fields"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+  /products/{id}:
+    get:
+      tags:
+        - Products
+      summary: Get a product by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the product to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+
+    patch:
+      summary: Update a product by ID
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of the product to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update product details
+        required: true
+        schema:
+          $ref: "#/components/schemas/ProductCreateDTO"
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        201:
+          description: "Created"
+        400:
+          description: "Required Fields"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+    delete:
+      summary: Delete a product by ID
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of the product to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+  /coupons:
+    get:
+      tags:
+        - Coupons
+      summary: Get all coupons
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+
+    post:
+      summary: Create a new coupon
+      tags:
+        - Coupons
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Create a new coupon
+        required: true
+        schema:
+          $ref: "#/components/schemas/CouponCreateDTO"
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        201:
+          description: "Created"
+        400:
+          description: "Required Fields"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+  /coupons/{id}:
+    get:
+      tags:
+        - Coupons
+      summary: Get a coupon by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the coupon to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+
+    patch:
+      summary: Update a coupon by ID
+      tags:
+        - Coupons
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of the coupon to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update coupon details
+        required: true
+        schema:
+          $ref: "#/components/schemas/CouponUpdateDTO"
+      responses:
+        200:
+          description: "OK"
+        404:
+          description: "Not Found"
+        500:
+          description: "Bad Request"
+        201:
+          description: "Created"
+        400:
+          description: "Required Fields"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+    delete:
+      summary: Delete a coupon by ID
+      tags:
+        - Coupons
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of the coupon to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+  /banners:
+    get:
+      tags:
+        - Banners
+      summary: Get all banners
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+
+    post:
+      summary: Create a new banner
+      tags:
+        - Banners
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Create a new banner
+        required: true
+        schema:
+          $ref: "#/components/schemas/BannerCreateDTO"
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        201:
+          description: "Created"
+        400:
+          description: "Required Fields"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+  /banners/{id}:
+    get:
+      tags:
+        - Banners
+      summary: Get a banner by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the banner to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+    patch:
+      summary: Update a banner by ID
+      tags:
+        - Banners
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of the banner to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update banner details
+        required: true
+        schema:
+          $ref: "#/components/schemas/BannerUpdateDTO"
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        201:
+          description: "Created"
+        400:
+          description: "Required Fields"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+    delete:
+      summary: Delete a banner by ID
+      tags:
+        - Banners
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of the banner to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+        409:
+          description: "Conflict"
+        500:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+    /register:
+    post:
+      summary: User registration
+      tags:
+        - Authentication
+      requestBody:
+        description: User registration details
+        required: true
+        schema:
+          $ref: "#/components/schemas/UserRegistrationDTO"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        409:
+          description: "Conflict"
+
+  /login:
+    post:
+      summary: User login
+      tags:
+        - Authentication
+      requestBody:
+        description: User login details
+        required: true
+        schema:
+          $ref: "#/components/schemas/UserLoginDTO"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: "JWT access token"
+                  token_type:
+                    type: string
+                    description: "Token type"
+                  expires_in:
+                    type: integer
+                    description: "Access token expiration time in seconds"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+
+  /logout:
+    post:
+      summary: User logout
+      tags:
+        - Authentication
+      responses:
+        200:
+          description: "OK"
+        401:
+          description: "Unauthorized"
 
 components:
   securitySchemes:
@@ -21,71 +452,40 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  schemas:
+    Product:
+      # ... (existing product schema, unchanged)
 
-paths:
-  /movies:
-    get:
-      tags:
-        - Movies
-      summary: Get all user movies
-      security:
-        - BearerAuth: []
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/MovieDTO"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not found user movies
-    post:
-      summary: Add movie for user
-      tags:
-        - Movies
-      security:
-        - BearerAuth: []
-      requestBody:
-        description: Add new movie for user
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MovieCreateDTO"
-      responses:
-        "201":
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MovieDTO"
-        "400":
-          description: Bad request when title is undefined
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorType"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden - Basic user can add only 5 movies on month
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorType"
-        "404":
-          description: Movie not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorType"
-        "409":
-          description: User has this movie in the db
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorType"
+    Coupon:
+      # ... (existing coupon schema, unchanged)
+
+    ProductCreateDTO:
+      # ... (definition of the ProductCreateDTO schema)
+
+    ProductUpdateDTO:
+      # ... (definition of the ProductUpdateDTO schema)
+
+    CouponCreateDTO:
+      # ... (definition of the CouponCreateDTO schema)
+
+    CouponUpdateDTO:
+      # ... (definition of the CouponUpdateDTO schema)
+    UserRegistrationDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: "The username of the new user"
+        password:
+          type: string
+          description: "The password of the new user"
+
+    UserLoginDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: "The username of the user"
+        password:
+          type: string
+          description: "The password of the user"
