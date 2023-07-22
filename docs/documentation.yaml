@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: EasyReach API
+  description: Api for user movies
+  version: 1.0.0
+  contact:
+    name: Solomon Olatunji
+    email: realsolomon@outlook.com
+
+servers:
+  - url: /api/v1
+    description: Development server
+
+tags:
+  - name: Movies
+    description: Auth actions with movies
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /movies:
+    get:
+      tags:
+        - Movies
+      summary: Get all user movies
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MovieDTO"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not found user movies
+    post:
+      summary: Add movie for user
+      tags:
+        - Movies
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Add new movie for user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MovieCreateDTO"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MovieDTO"
+        "400":
+          description: Bad request when title is undefined
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorType"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden - Basic user can add only 5 movies on month
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorType"
+        "404":
+          description: Movie not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorType"
+        "409":
+          description: User has this movie in the db
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorType"
