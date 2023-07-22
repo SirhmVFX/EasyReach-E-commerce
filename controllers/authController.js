@@ -7,7 +7,7 @@ const sendEmail = require("../utils/sendEmail");
 
 const register = async (req, res, next) => {
     try {
-        const { email, firstName, lastName, password } = req.body;
+        const { firstName, lastName, email, phone, password } = req.body;
 
         const emailAlreadyExists = await User.findOne({ email });
         if (emailAlreadyExists) {
@@ -17,7 +17,14 @@ const register = async (req, res, next) => {
         const isFirstAccount = (await User.countDocuments({})) === 0;
         const role = isFirstAccount ? "admin" : "user";
 
-        const user = await User.create({ firstName, lastName, email, password, role });
+        const user = await User.create({
+            firstName,
+            lastName,
+            email,
+            phone,
+            password,
+            role
+        });
 
         const fullname = firstName + " " + lastName;
         const subject = "Welcome To Easyreach";

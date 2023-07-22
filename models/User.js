@@ -1,17 +1,14 @@
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
-const validator = require("validator");
 const Schema = mongoose.Schema;
 const autopopulate = require("mongoose-autopopulate");
 const UserSchema = new Schema(
   {
     firstName: {
       type: String,
-      required: [true, "You must provide a firstname"],
     },
     lastName: {
       type: String,
-      required: [true, "You must provide a lastname"],
     },
     email: {
       type: String,
@@ -19,11 +16,7 @@ const UserSchema = new Schema(
     },
     phone: {
       type: Number,
-      required: true,
       unique: true,
-    },
-    location: {
-      type: String,
     },
     profilePic: {
       public_id: { type: String },
