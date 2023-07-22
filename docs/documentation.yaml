@@ -395,7 +395,7 @@ paths:
         403:
           description: "Forbidden"
 
-  /register:
+  /auth/register:
     post:
       summary: User registration
       tags:
@@ -413,7 +413,7 @@ paths:
         409:
           description: "Conflict"
 
-  /login:
+  /auth/login:
     post:
       summary: User login
       tags:
@@ -445,7 +445,7 @@ paths:
         401:
           description: "Unauthorized"
 
-  /logout:
+  /auth/logout:
     post:
       summary: User logout
       tags:
@@ -455,6 +455,26 @@ paths:
           description: "OK"
         401:
           description: "Unauthorized"
+
+  /auth/forgetPassword:
+    post:
+      summary: Forget Password
+      tags:
+        - Authentication
+      requestBody:
+        description: User email for password reset
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/UserForgetPassword"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        404:
+          description: "Not Found"
 
   /users:
     get:
@@ -1089,4 +1109,10 @@ definitions:
     type: object
     properties:
       productId:
+        type: string
+
+  UserForgetPassword:
+    type: object
+    properties:
+      email:
         type: string
