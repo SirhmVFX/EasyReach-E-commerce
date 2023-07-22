@@ -4,7 +4,6 @@ const HttpError = require("../HttpException");
 const { UserTokenPayload, createJWT } = require("../utils");
 const generateRandomPassword = require("../utils/password");
 const sendEmail = require("../utils/sendEmail");
-const bcryptjs = require("bcryptjs");
 
 const register = async (req, res, next) => {
     try {
@@ -20,13 +19,13 @@ const register = async (req, res, next) => {
 
         const user = await User.create({ firstName, lastName, email, password, role });
 
-        const username = user.firstName + " " + user.lastName;
+        const fullname = firstName + " " + lastName;
         const subject = "Welcome To Easyreach";
         const send_to = email;
         const sent_from = "Easyreach <hello@seemetracker.com>";
         const reply_to = "admin@mail.com";
         const template = "welcome";
-        const name = username;
+        const name = fullname;
 
         try {
             await sendEmail(
@@ -94,19 +93,18 @@ const forgetPassword = async (req, res, next) => {
         }
 
         const newPassword = generateRandomPassword(10);
-        const hashedPassword = await bcryptjs.hash(newPassword);
 
-        user.password = hashedPassword;
+        user.password = newPassword;
         await user.save();
 
-        const username = user.firstname + " " + user.lastname;
+        const fullname = user.firstName + " " + user.lastName;
         const subject = "Reset Password";
         const send_to = email;
         const sent_from = "Easyreach <hello@seemetracker.com>";
         const reply_to = "admin@mail.com";
         const template = "forgetPassword";
         const newpassword = newPassword;
-        const name = username;
+        const name = fullname;
 
         try {
             await sendEmail(
@@ -122,7 +120,7 @@ const forgetPassword = async (req, res, next) => {
             console.error("Error sending email:", error);
         }
 
-        res.status(StatusCodes.OK).json({ msg: "New password generated and saved" });
+        res.status(StatusCodes.OK).json({ msg: "New password generated" });
     } catch (error) {
         next(error);
     }
