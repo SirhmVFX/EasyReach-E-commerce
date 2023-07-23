@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: EasyReach API
-  description: API for user movies
+  description: API for Ecommerce
   version: 1.0.0
   contact:
     name: Solomon Olatunji

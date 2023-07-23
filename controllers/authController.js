@@ -3,6 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const HttpError = require("../HttpException");
 const { UserTokenPayload, createJWT } = require("../utils");
 const generateRandomPassword = require("../utils/password");
+const bcrypt = require("bcryptjs");
 const sendEmail = require("../utils/sendEmail");
 
 const register = async (req, res, next) => {
@@ -17,22 +18,23 @@ const register = async (req, res, next) => {
         const isFirstAccount = (await User.countDocuments({})) === 0;
         const role = isFirstAccount ? "admin" : "user";
 
+        const hashPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
             firstName,
             lastName,
             email,
             phone,
-            password,
+            password: hashPassword,
             role
         });
 
-        const fullname = firstName + " " + lastName;
+        const fullName = firstName + " " + lastName;
         const subject = "Welcome To Easyreach";
         const send_to = email;
         const sent_from = "Easyreach <hello@seemetracker.com>";
         const reply_to = "admin@mail.com";
         const template = "welcome";
-        const name = fullname;
+        const name = fullName;
 
         try {
             await sendEmail(
@@ -50,7 +52,7 @@ const register = async (req, res, next) => {
         const tokenUser = UserTokenPayload(user);
         const token = createJWT({ payload: tokenUser });
 
-        res.status(StatusCodes.CREATED).json({ user: tokenUser, token: token });
+        res.status(StatusCodes.CREATED).json({ user, token });
     } catch (error) {
         next(error);
     }
@@ -70,7 +72,7 @@ const login = async (req, res, next) => {
             throw new HttpError.UnauthenticatedError("User doesn't exist");
         }
 
-        const isPasswordCorrect = await user.comparePassword(password);
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
         if (!isPasswordCorrect) {
             throw new HttpError.UnauthenticatedError("Wrong password");
@@ -79,7 +81,7 @@ const login = async (req, res, next) => {
         const tokenUser = UserTokenPayload(user);
         const token = createJWT({ payload: tokenUser });
 
-        res.status(StatusCodes.CREATED).json({ user: tokenUser, token: token });
+        res.status(StatusCodes.OK).json({ user: tokenUser, token: token });
     } catch (error) {
         next(error);
     }

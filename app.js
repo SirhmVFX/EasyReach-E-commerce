@@ -43,7 +43,11 @@ app.use(mongoSanitize());
 app.use(morgan("tiny"));
 app.use(cookieParser(process.env.JWT_SECRET));
 
+app.use(express.json({ limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
+// Swagger UI
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerJsDocs = YAML.load("./docs/documentation.yaml");
@@ -60,11 +64,6 @@ app.use('/api/v1/banners', bannerRoutes);
 app.use('/api/v1/coupons', couponRoutes);
 app.use('/api/v1/wishlist', wishlistRoute);
 
-app.use(express.json({ limit: "50mb" }));
-
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-
 app.use('/', express.static(path.join(__dirname, 'public')))
 app.use('/', require('./routes/Root'))
 app.all('*', (req, res) => {
@@ -79,7 +78,6 @@ app.all('*', (req, res) => {
 })
 
 app.use('/', express.static(path.join(__dirname, 'public/images')))
-
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);

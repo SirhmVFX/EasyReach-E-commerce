@@ -1,5 +1,7 @@
 const userTokenPayload = (user) => {
-    return { username: user.username, userId: user._id, role: user.role };
+    return { email: user.email, userId: user._id, role: user.role };
 };
 
-module.exports = userTokenPayload;
+module.exports = {
+    userTokenPayload
+};

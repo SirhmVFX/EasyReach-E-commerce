@@ -8,9 +8,8 @@ const sendEmail = async (
     sent_from,
     reply_to,
     template,
-    newpassword,
     name,
-    year,
+    newpassword,
     emailContent,
 ) => {
     const currentYear = new Date().getFullYear();
@@ -28,12 +27,12 @@ const sendEmail = async (
 
     const handlebarOptions = {
         viewEngine: {
-            extName: ".handlebars",
-            partialsDir: path.resolve("./email"),
+            extName: ".hbs",
+            partialsDir: path.resolve("./emails"),
             defaultLayout: false,
         },
-        viewPath: path.resolve("./email"),
-        extName: ".handlebars",
+        viewPath: path.resolve("./emails"),
+        extName: ".hbs",
     };
 
     transporter.use("compile", hbs(handlebarOptions));

@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const autopopulate = require("mongoose-autopopulate");
 const UserSchema = new Schema(
   {
     firstName: {
@@ -39,18 +38,6 @@ const UserSchema = new Schema(
   },
   { timestamps: true }
 );
-
-UserSchema.plugin(autopopulate);
-UserSchema.pre("save", async function () {
-  if (!this.isModified("password")) return;
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
-
-UserSchema.methods.comparePassword = async function (userPassword) {
-  const isMatch = await bcrypt.compare(userPassword, this.password);
-  return isMatch;
-};
 
 let User = mongoose.model("User", UserSchema);
 
