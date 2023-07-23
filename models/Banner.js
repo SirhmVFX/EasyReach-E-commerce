@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const BannerSchema = mongoose.Schema(
     {
         name: {
