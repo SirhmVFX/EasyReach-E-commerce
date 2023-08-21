@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
 const HttpError = require("../HttpException");
-const { UserTokenPayload, createJWT } = require("../utils");
+const { createJWT } = require("../utils");
 const generateRandomPassword = require("../utils/password");
 const bcrypt = require("bcryptjs");
 const sendEmail = require("../utils/sendEmail");
@@ -49,7 +49,12 @@ const register = async (req, res, next) => {
             console.error("Error sending email:", error);
         }
 
-        const tokenUser = UserTokenPayload(user);
+        const tokenUser = {
+            email: user.email,
+            userId: user._id,
+            role: user.role
+        };
+        
         const token = createJWT({ payload: tokenUser });
 
         res.status(StatusCodes.CREATED).json({ user, token });
@@ -62,14 +67,10 @@ const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            throw new HttpError.BadRequestError("Please provide email and password");
-        }
-
         const user = await User.findOne({ email });
 
         if (!user) {
-            throw new HttpError.UnauthenticatedError("User doesn't exist");
+            throw new HttpError.UnauthenticatedError("User Not Found");
         }
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
@@ -78,7 +79,12 @@ const login = async (req, res, next) => {
             throw new HttpError.UnauthenticatedError("Wrong password");
         }
 
-        const tokenUser = UserTokenPayload(user);
+        const tokenUser = {
+            email: user.email,
+            userId: user._id,
+            role: user.role
+        };
+
         const token = createJWT({ payload: tokenUser });
 
         res.status(StatusCodes.OK).json({ user: tokenUser, token: token });

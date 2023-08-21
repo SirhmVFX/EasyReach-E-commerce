@@ -3,10 +3,8 @@ const { StatusCodes } = require('http-status-codes');
 const HttpError = require('../HttpException');
 
 const {
-    createTokenUser,
     attachCookiesToResponse,
     authorizeUser,
-    UserTokenPayload,
 } = require('../utils');
 
 const getAllUsers = async (req, res) => {
@@ -40,7 +38,12 @@ const updateUser = async (req, res) => {
 
     await user.save();
 
-    const tokenUser = UserTokenPayload(user);
+    const tokenUser = {
+        email: user.email,
+        userId: user._id,
+        role: user.role
+    };
+
     attachCookiesToResponse({ res, user: tokenUser });
     res.status(StatusCodes.OK).json({ user: tokenUser });
 };
